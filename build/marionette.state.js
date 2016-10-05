@@ -7,8 +7,8 @@ var _createClass = (function () { function defineProperties(target, props) { for
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('underscore'), require('backbone'), require('backbone.marionette')) : typeof define === 'function' && define.amd ? define(['underscore', 'backbone', 'backbone.marionette'], factory) : global.Marionette.State = factory(global._, global.Backbone, global.Mn);
-})(this, function (_, Backbone, Mn) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('underscore'), require('backbone.marionette'), require('backbone')) : typeof define === 'function' && define.amd ? define(['underscore', 'backbone.marionette', 'backbone'], factory) : global.Marionette.State = factory(global._, global.Mn, global.Backbone);
+})(this, function (_, Mn, Backbone) {
   'use strict';
 
   var State = Mn.Object.extend({
@@ -143,7 +143,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
       var preventDestroy = _ref2.preventDestroy;
 
-      this.bindEntityEvents(component, this.componentEvents);
+      this.bindEvents(component, this.componentEvents);
       if (!preventDestroy) {
         this.listenTo(component, 'destroy', this.destroy);
       }
@@ -151,7 +151,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     // Unbind `componentEvents` from `component` and stop listening to component 'destroy' event.
     unbindComponent: function unbindComponent(component) {
-      this.unbindEntityEvents(component, this.componentEvents);
+      this.unbindEvents(component, this.componentEvents);
       this.stopListening(component, 'destroy', this.destroy);
     },
 
@@ -264,7 +264,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       this.bindings = bindings;
     }
 
-    // Binds events handlers located on target to an entity using Marionette.bindEntityEvents, and
+    // Binds events handlers located on target to an entity using Marionette.bindEvents, and
     // also "syncs" initial state either immediately or whenever target fires a specific event.
     //
     // Initial state is synced by calling certain handlers at a precise moment.  Only the following
@@ -276,14 +276,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     _createClass(Syncing, [{
       key: 'stop',
       value: function stop() {
-        Mn.unbindEntityEvents(this.target, this.entity, this.bindings);
+        Mn.unbindEvents(this.target, this.entity, this.bindings);
         this.target.off(this.event, this.handler);
         this.event = this.handler = null;
       }
     }, {
       key: '_when',
       value: function _when(event) {
-        Mn.bindEntityEvents(this.target, this.entity, this.bindings);
+        Mn.bindEvents(this.target, this.entity, this.bindings);
         this.event = event;
         this.handler = _.bind(sync, this, this.target, this.entity, this.bindings);
         this.target.on(this.event, this.handler).on('destroy', _.bind(this.stop, this));
@@ -291,7 +291,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }, {
       key: '_now',
       value: function _now() {
-        Mn.bindEntityEvents(this.target, this.entity, this.bindings);
+        Mn.bindEvents(this.target, this.entity, this.bindings);
         sync(this.target, this.entity, this.bindings);
       }
     }]);
