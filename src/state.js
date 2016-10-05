@@ -121,7 +121,7 @@ const State = Mn.Object.extend({
   // Bind `componentEvents` to `component` and cascade destroy to self when component fires
   // 'destroy'.  To prevent self-destroy behavior, pass `preventDestroy: true` as an option.
   bindComponent(component, { preventDestroy }={}) {
-    this.bindEntityEvents(component, this.componentEvents);
+    this.bindEvents(component, this.componentEvents);
     if (!preventDestroy) {
       this.listenTo(component, 'destroy', this.destroy);
     }
@@ -129,7 +129,7 @@ const State = Mn.Object.extend({
 
   // Unbind `componentEvents` from `component` and stop listening to component 'destroy' event.
   unbindComponent(component) {
-    this.unbindEntityEvents(component, this.componentEvents);
+    this.unbindEvents(component, this.componentEvents);
     this.stopListening(component, 'destroy', this.destroy);
   },
 

@@ -65,13 +65,13 @@ class Syncing {
   }
 
   stop() {
-    Mn.unbindEntityEvents(this.target, this.entity, this.bindings);
+    Mn.unbindEvents(this.target, this.entity, this.bindings);
     this.target.off(this.event, this.handler);
     this.event = this.handler = null;
   }
 
   _when(event) {
-    Mn.bindEntityEvents(this.target, this.entity, this.bindings);
+    Mn.bindEvents(this.target, this.entity, this.bindings);
     this.event = event;
     this.handler = _.bind(sync, this, this.target, this.entity, this.bindings);
     this.target
@@ -80,12 +80,12 @@ class Syncing {
   }
 
   _now() {
-    Mn.bindEntityEvents(this.target, this.entity, this.bindings);
+    Mn.bindEvents(this.target, this.entity, this.bindings);
     sync(this.target, this.entity, this.bindings);
   }
 }
 
-// Binds events handlers located on target to an entity using Marionette.bindEntityEvents, and
+// Binds events handlers located on target to an entity using Marionette.bindEvents, and
 // also "syncs" initial state either immediately or whenever target fires a specific event.
 //
 // Initial state is synced by calling certain handlers at a precise moment.  Only the following
