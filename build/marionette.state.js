@@ -30,6 +30,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     // Initial state attributes hash after 'initialState' option and defaults are applied
     _initialState: undefined,
+    _: undefined,
 
     // options {
     //   initialState: {object} Attributes that will override `defaultState`.  The result of
@@ -39,6 +40,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     //   preventDestroy: {boolean} If true, then this will not destroy on `component` destroy.
     // }
     constructor: function constructor() {
+      var _this = this;
+
       var _ref = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 
       var initialState = _ref.initialState;
@@ -64,6 +67,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.bindComponent(component, { preventDestroy: preventDestroy });
       }
 
+      this._model.on('change', function (state) {
+        _this._ = state;
+      });
       State.__super__.constructor.apply(this, arguments);
     },
 
@@ -173,7 +179,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }
   });
 
-  var state = State;
+  var _state = State;
 
   var state_functions = Object.defineProperties({}, {
     sync: {
@@ -210,7 +216,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     // Only certain model/collection events are syncable.
     var collectionMatch = entity instanceof Backbone.Collection && event.match(collectionEventMatcher);
-    var modelMatch = (entity instanceof Backbone.Model || entity instanceof state) && (modelEventMatch = event.match(modelEventMatcher));
+    var modelMatch = (entity instanceof Backbone.Model || entity instanceof _state) && (modelEventMatch = event.match(modelEventMatcher));
     if (!collectionMatch && !modelMatch) {
       return;
     }
@@ -323,9 +329,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     return !!_.chain(model.changed).keys().intersection(attrs).size().value();
   }
 
-  _.extend(state, state_functions);
+  _.extend(_state, state_functions);
 
-  var index = state;
+  var index = _state;
 
   return index;
 });
+//# sourceMappingURL=./marionette.state.js.map

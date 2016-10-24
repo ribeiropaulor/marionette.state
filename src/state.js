@@ -22,6 +22,7 @@ const State = Mn.Object.extend({
 
   // Initial state attributes hash after 'initialState' option and defaults are applied
   _initialState: undefined,
+  _: undefined,
 
   // options {
   //   initialState: {object} Attributes that will override `defaultState`.  The result of
@@ -50,6 +51,7 @@ const State = Mn.Object.extend({
       this.bindComponent(component, { preventDestroy });
     }
 
+    this._model.on('change',state => { this._ = state })
     State.__super__.constructor.apply(this, arguments);
   },
 
