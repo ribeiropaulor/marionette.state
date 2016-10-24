@@ -47,8 +47,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var initialState = _ref.initialState;
       var component = _ref.component;
       var preventDestroy = _ref.preventDestroy;
-      var _ref$pureState = _ref.pureState;
-      var pureState = _ref$pureState === undefined ? '_' : _ref$pureState;
+      var _ref$pure = _ref.pure;
+      var pure = _ref$pure === undefined ? '_' : _ref$pure;
+      var proxy = _ref.proxy;
 
       Object.defineProperty(this, 'attributes', {
         get: function get() {
@@ -71,7 +72,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
       this[pureState] = this._model.toJSON();
       this._model.on('change', function (state) {
-        _this[pureState] = state;
+        if (proxy !== undefined) proxy = state;
+        _this[pure] = state;
       });
       State.__super__.constructor.apply(this, arguments);
     },
