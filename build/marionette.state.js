@@ -46,6 +46,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
       var initialState = _ref.initialState;
       var component = _ref.component;
+      var proxyState = _ref.proxyState;
       var preventDestroy = _ref.preventDestroy;
 
       Object.defineProperty(this, 'attributes', {
@@ -68,6 +69,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }
 
       this._model.on('change', function (state) {
+        if (proxyState !== undefined) proxyState = state;
         _this._ = state;
       });
       State.__super__.constructor.apply(this, arguments);
