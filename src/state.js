@@ -31,7 +31,7 @@ const State = Mn.Object.extend({
   //     i.e., when `component` fires 'destroy', then destroy myself.
   //   preventDestroy: {boolean} If true, then this will not destroy on `component` destroy.
   // }
-  constructor({ initialState, component, proxyState, preventDestroy }={}) {
+  constructor({ initialState, component, preventDestroy,pureState='_' }={}) {
     Object.defineProperty(this, 'attributes', {
       get: function () {
         return this._model.attributes;
@@ -51,10 +51,7 @@ const State = Mn.Object.extend({
       this.bindComponent(component, { preventDestroy });
     }
 
-    this._model.on('change',state => { 
-      if (proxyState !== undefined) proxyState = state
-      this._ = state 
-    })
+    this._model.on('change',state => { this[options.pureState] = state })
     State.__super__.constructor.apply(this, arguments);
   },
 
