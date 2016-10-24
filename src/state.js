@@ -51,8 +51,8 @@ const State = Mn.Object.extend({
       this.bindComponent(component, { preventDestroy });
     }
 
-    this[options.pureState] = this._model.toJSON()
-    this._model.on('change',state => { this[options.pureState] = state })
+    this[pureState] = this._model.toJSON()
+    this._model.on('change',state => { this[pureState] = state })
     State.__super__.constructor.apply(this, arguments);
   },
 

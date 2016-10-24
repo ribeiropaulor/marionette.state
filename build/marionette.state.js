@@ -69,9 +69,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.bindComponent(component, { preventDestroy: preventDestroy });
       }
 
-      this[options.pureState] = this._model.toJSON();
+      this[pureState] = this._model.toJSON();
       this._model.on('change', function (state) {
-        _this[options.pureState] = state;
+        _this[pureState] = state;
       });
       State.__super__.constructor.apply(this, arguments);
     },
