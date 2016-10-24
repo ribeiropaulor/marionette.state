@@ -70,7 +70,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.bindComponent(component, { preventDestroy: preventDestroy });
       }
 
-      this[pureState] = this._model.toJSON();
+      if (proxy !== undefined) proxy = this._model.toJSON();
+      this[pure] = this._model.toJSON();
       this._model.on('change', function (state) {
         if (proxy !== undefined) proxy = state;
         _this[pure] = state;

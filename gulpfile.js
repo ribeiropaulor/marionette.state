@@ -61,7 +61,7 @@ createLintTask('lint-src', ['src/**/*.js']);
 createLintTask('lint-test', ['test/**/*.js']);
 
 // Build two versions of the library
-gulp.task('build', [ 'clean'], function (done) {
+gulp.task('build', ['lint-src', 'clean'], function (done) {
   esperanto.bundle({
     base:  'src',
     entry: config.entryFileName
