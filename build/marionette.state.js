@@ -7,8 +7,8 @@ var _createClass = (function () { function defineProperties(target, props) { for
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('underscore'), require('backbone'), require('backbone.marionette')) : typeof define === 'function' && define.amd ? define(['underscore', 'backbone', 'backbone.marionette'], factory) : global.Marionette.State = factory(global._, global.Backbone, global.Mn);
-})(this, function (_, Backbone, Mn) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('underscore'), require('backbone.marionette'), require('backbone')) : typeof define === 'function' && define.amd ? define(['underscore', 'backbone.marionette', 'backbone'], factory) : global.Marionette.State = factory(global._, global.Mn, global.Backbone);
+})(this, function (_, Mn, Backbone) {
   'use strict';
 
   var State = Mn.Object.extend({
@@ -48,7 +48,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var component = _ref.component;
       var preventDestroy = _ref.preventDestroy;
       var _ref$pure = _ref.pure;
-      var pure = _ref$pure === undefined ? '_' : _ref$pure;
+      var pure = _ref$pure === undefined ? 's' : _ref$pure;
       var proxy = _ref.proxy;
 
       Object.defineProperty(this, 'attributes', {
