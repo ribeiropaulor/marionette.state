@@ -22,7 +22,7 @@ const State = Mn.Object.extend({
 
   // Initial state attributes hash after 'initialState' option and defaults are applied
   _initialState: undefined,
-  _: undefined,
+  s: undefined,
 
   // options {
   //   initialState: {object} Attributes that will override `defaultState`.  The result of
@@ -31,7 +31,7 @@ const State = Mn.Object.extend({
   //     i.e., when `component` fires 'destroy', then destroy myself.
   //   preventDestroy: {boolean} If true, then this will not destroy on `component` destroy.
   // }
-  constructor({ initialState, component, preventDestroy,pure='s',proxy }={}) {
+  constructor({ initialState, component, preventDestroy,proxy }={}) {
     Object.defineProperty(this, 'attributes', {
       get: function () {
         return this._model.attributes;
@@ -55,7 +55,7 @@ const State = Mn.Object.extend({
     this[pure] = this._model.toJSON()
     this._model.on('change',state => { 
       if (proxy !== undefined) proxy = state
-      this[pure] = state 
+      this.s = state 
     })
     State.__super__.constructor.apply(this, arguments);
   },

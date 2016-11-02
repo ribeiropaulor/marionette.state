@@ -7,8 +7,8 @@ var _createClass = (function () { function defineProperties(target, props) { for
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('underscore'), require('backbone.marionette'), require('backbone')) : typeof define === 'function' && define.amd ? define(['underscore', 'backbone.marionette', 'backbone'], factory) : global.Marionette.State = factory(global._, global.Mn, global.Backbone);
-})(this, function (_, Mn, Backbone) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('underscore'), require('backbone'), require('backbone.marionette')) : typeof define === 'function' && define.amd ? define(['underscore', 'backbone', 'backbone.marionette'], factory) : global.Marionette.State = factory(global._, global.Backbone, global.Mn);
+})(this, function (_, Backbone, Mn) {
   'use strict';
 
   var State = Mn.Object.extend({
@@ -30,7 +30,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     // Initial state attributes hash after 'initialState' option and defaults are applied
     _initialState: undefined,
-    _: undefined,
+    s: undefined,
 
     // options {
     //   initialState: {object} Attributes that will override `defaultState`.  The result of
@@ -47,8 +47,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var initialState = _ref.initialState;
       var component = _ref.component;
       var preventDestroy = _ref.preventDestroy;
-      var _ref$pure = _ref.pure;
-      var pure = _ref$pure === undefined ? 's' : _ref$pure;
       var proxy = _ref.proxy;
 
       Object.defineProperty(this, 'attributes', {
@@ -74,7 +72,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       this[pure] = this._model.toJSON();
       this._model.on('change', function (state) {
         if (proxy !== undefined) proxy = state;
-        _this[pure] = state;
+        _this.s = state;
       });
       State.__super__.constructor.apply(this, arguments);
     },
@@ -341,4 +339,3 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   return index;
 });
-//# sourceMappingURL=./marionette.state.js.map
