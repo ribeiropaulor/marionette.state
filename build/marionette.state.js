@@ -69,7 +69,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }
 
       if (proxy !== undefined) proxy = this._model.toJSON();
-      this[pure] = this._model.toJSON();
+      this.s = this._model.toJSON();
       this._model.on('change', function (state) {
         if (proxy !== undefined) proxy = state;
         _this.s = state;
@@ -339,3 +339,4 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   return index;
 });
+//# sourceMappingURL=./marionette.state.js.map

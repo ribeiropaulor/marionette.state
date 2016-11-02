@@ -52,7 +52,7 @@ const State = Mn.Object.extend({
     }
 
     if (proxy !== undefined) proxy = this._model.toJSON()
-    this[pure] = this._model.toJSON()
+    this.s = this._model.toJSON()
     this._model.on('change',state => { 
       if (proxy !== undefined) proxy = state
       this.s = state 
