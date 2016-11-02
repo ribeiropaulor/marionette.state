@@ -31,7 +31,7 @@ const State = Mn.Object.extend({
   //     i.e., when `component` fires 'destroy', then destroy myself.
   //   preventDestroy: {boolean} If true, then this will not destroy on `component` destroy.
   // }
-  constructor({ initialState, component, preventDestroy,pure='_',proxy }={}) {
+  constructor({ initialState, component, preventDestroy,pure='s',proxy }={}) {
     Object.defineProperty(this, 'attributes', {
       get: function () {
         return this._model.attributes;
